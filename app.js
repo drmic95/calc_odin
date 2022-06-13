@@ -41,21 +41,21 @@ function divide(arr) {
   return console.log(total);
 }
 
-function operate(operator, fn, arr) {
+function operate(operator, arr) {
   if (operator === '+') {
-    fn === add(arr);
+    add(arr);
   } else if (operator === '-') {
-    fn === subtract(arr);
+    subtract(arr);
   } else if (operator === '*') {
-    fn === multiply(arr);
+    multiply(arr);
   } else if (operator === '/') {
-    fn === divide(arr);
+    divide(arr);
   } else {
     console.log('something went wrong');
   }
 }
-// const test5 = [10, 5];
-// operate('-', subtract, test5);
+const test5 = [10, 5];
+operate('-', test5);
 
 const calcArr = [];
 
@@ -142,8 +142,12 @@ container.addEventListener('click', (event) => {
     calcArr.splice(0, calcArr.length);
     output.textContent = calcArr;
   } else if (equal) {
-    // now, the hard part
+    output.textContent = operate(calcArr[1], [calcArr[0], calcArr[2]]);
   }
 });
 
 // try split to split the array of numbers based on +/-/* and / calc them individually and then return total
+// reduce method on all event targets split by +/*- operators
+// if else may be short-end with one of loop methods
+
+// operate('-', subtract, test5); find "-" "+", find "*" "/", if this than subtract.etc. arr
