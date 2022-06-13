@@ -1,6 +1,5 @@
-// 'use strict';
+'use strict';
 
-const equalClass = document.querySelector('.equal');
 const container = document.querySelector('.container');
 const output = document.getElementById('calc');
 
@@ -12,8 +11,6 @@ function add(arr) {
   }
   return console.log(total);
 }
-let test1 = [4, 5, 6, 5, 29, 8403, 8483];
-// add(test1);
 
 // subtract function; works for all numbers that are not equal to arr[0]
 function subtract(arr) {
@@ -24,8 +21,6 @@ function subtract(arr) {
   }
   return console.log(total);
 }
-let test2 = [20, 5, 10];
-//subtract(test2);
 
 // multiply function
 function multiply(arr) {
@@ -35,8 +30,6 @@ function multiply(arr) {
   }
   return console.log(total);
 }
-let test3 = [2, 10];
-// multiply(test3);
 
 // divide function
 function divide(arr) {
@@ -47,9 +40,7 @@ function divide(arr) {
   }
   return console.log(total);
 }
-let test4 = [10, 5, 20];
 
-// divide(test4);
 function operate(operator, fn, arr) {
   if (operator === '+') {
     fn === add(arr);
