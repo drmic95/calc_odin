@@ -123,6 +123,8 @@ container.addEventListener('click', (event) => {
     output.textContent = calcArr;
     console.log(calcArr);
   } else if (plusEl) {
+    // concatinate or reduce the numbers together before operation so that larger numbers can be calculated
+    // calcArr.forEach(), reduce()
     calcArr.push('+');
     output.textContent = calcArr;
     console.log(calcArr);
@@ -142,7 +144,8 @@ container.addEventListener('click', (event) => {
     calcArr.splice(0, calcArr.length);
     output.textContent = calcArr;
   } else if (equal) {
-    output.textContent = operate(calcArr[1], [calcArr[0], calcArr[2]]);
+    const result = operate(calcArr[1], [calcArr[0], calcArr[2]]);
+    output.textContent = result; // correct calc but goes into console
   }
 });
 
@@ -150,4 +153,6 @@ container.addEventListener('click', (event) => {
 // reduce method on all event targets split by +/*- operators
 // if else may be short-end with one of loop methods
 
-// operate('-', subtract, test5); find "-" "+", find "*" "/", if this than subtract.etc. arr
+// operate('-', test5); find "-" "+", find "*" "/", if this than subtract.etc. arr
+
+// before operators concatinete the array elemensts
