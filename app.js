@@ -1,29 +1,8 @@
 // 'use strict';
 
-// all numbers selected
-const num0 = document.querySelector('.num_0');
-const num1 = document.querySelector('.num_1');
-const num2 = document.querySelector('.num_2');
-
-const num3 = document.querySelector('.num_3');
-const num4 = document.querySelector('.num_4');
-const num5 = document.querySelector('.num_5');
-
-const num6 = document.querySelector('.num_6');
-const num7 = document.querySelector('.num_7');
-const num8 = document.querySelector('.num_8');
-
-const num9 = document.querySelector('.num_9');
-
-// operator elements
-const minusEl = document.querySelector('.op_minus');
-const plusEl = document.querySelector('.op_plus');
-const divideEl = document.querySelector('.op_divide');
-const multiplyEl = document.querySelector('.op_multiply');
 const equalClass = document.querySelector('.equal');
-const clear = document.querySelector('.clear');
 const container = document.querySelector('.container');
-const input = document.getElementById('calc');
+const output = document.getElementById('calc');
 
 // add function
 function add(arr) {
@@ -87,11 +66,11 @@ function operate(operator, fn, arr) {
 // const test5 = [10, 5];
 // operate('-', subtract, test5);
 
-// try split to split the array of numbers based on +/-/* and / calc them individually and then return total
+const calcArr = [];
 
 // add eventListeners
-
 container.addEventListener('click', (event) => {
+  // numbers
   const zero = event.target.classList.contains('num_0');
   const one = event.target.classList.contains('num_1');
   const two = event.target.classList.contains('num_2');
@@ -103,7 +82,77 @@ container.addEventListener('click', (event) => {
   const eight = event.target.classList.contains('num_8');
   const nine = event.target.classList.contains('num_9');
 
+  // operators
+  const minusEl = event.target.classList.contains('op_minus');
+  const plusEl = event.target.classList.contains('op_plus');
+  const multiplyEl = event.target.classList.contains('op_multiply');
+  const divideEl = event.target.classList.contains('op_divide');
+
+  const clear = event.target.classList.contains('clear');
+  const equal = event.target.classList.contains('equal');
+
   if (zero) {
-    input.textContent = 0; // old text content needs to show
+    calcArr.push(0);
+    output.textContent = calcArr;
+    console.log(calcArr);
+  } else if (one) {
+    calcArr.push(1);
+    output.textContent = calcArr;
+    console.log(calcArr);
+  } else if (two) {
+    calcArr.push(2);
+    output.textContent = calcArr;
+    console.log(calcArr);
+  } else if (three) {
+    calcArr.push(3);
+    output.textContent = calcArr;
+    console.log(calcArr);
+  } else if (four) {
+    calcArr.push(4);
+    output.textContent = calcArr;
+    console.log(calcArr);
+  } else if (five) {
+    calcArr.push(5);
+    output.textContent = calcArr;
+    console.log(calcArr);
+  } else if (six) {
+    calcArr.push(6);
+    output.textContent = calcArr;
+    console.log(calcArr);
+  } else if (seven) {
+    calcArr.push(7);
+    output.textContent = calcArr;
+    console.log(calcArr);
+  } else if (eight) {
+    calcArr.push(8);
+    output.textContent = calcArr;
+    console.log(calcArr);
+  } else if (nine) {
+    calcArr.push(9);
+    output.textContent = calcArr;
+    console.log(calcArr);
+  } else if (plusEl) {
+    calcArr.push('+');
+    output.textContent = calcArr;
+    console.log(calcArr);
+  } else if (minusEl) {
+    calcArr.push('-');
+    output.textContent = calcArr;
+    console.log(calcArr);
+  } else if (multiplyEl) {
+    calcArr.push('*');
+    output.textContent = calcArr;
+    console.log(calcArr);
+  } else if (divideEl) {
+    calcArr.push('/');
+    output.textContent = calcArr;
+    console.log(calcArr);
+  } else if (clear) {
+    calcArr.splice(0, calcArr.length);
+    output.textContent = calcArr;
+  } else if (equal) {
+    // now, the hard part
   }
 });
+
+// try split to split the array of numbers based on +/-/* and / calc them individually and then return total
