@@ -153,8 +153,13 @@ container.addEventListener('click', (event) => {
     resultArr.splice(0, resultArr.length);
     output.textContent = calcArr;
   } else if (equal) {
+    const secNum = calcArr
+      .splice(2, calcArr.length)
+      .reduce((a, b) => String(a + b), 0);
+    calcArr.push(Number(secNum));
+
     resultArr.unshift(operate(calcArr[1], [calcArr[0], calcArr[2]]));
-    console.log(resultArr); // undefined is typed for some reason
+    console.log(resultArr); // undefined is typed for some reason at resultArr[0]
     output.textContent = resultArr[1];
   }
 });
