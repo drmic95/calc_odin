@@ -2,6 +2,8 @@
 
 const container = document.querySelector('.container');
 const output = document.getElementById('calc');
+const calcArr = [];
+const resultArr = [];
 
 // add function
 function add(arr) {
@@ -9,7 +11,7 @@ function add(arr) {
   for (let i = 0; i < arr.length; i++) {
     total += arr[i];
   }
-  return console.log(total);
+  return resultArr.push(total);
 }
 
 // subtract function; works for all numbers that are not equal to arr[0]
@@ -19,7 +21,7 @@ function subtract(arr) {
     if (arr[i] === arr[0]) continue;
     total -= arr[i];
   }
-  return console.log(total);
+  return resultArr.push(total);
 }
 
 // multiply function
@@ -28,7 +30,7 @@ function multiply(arr) {
   for (let i = 0; i < arr.length; i++) {
     total = total * arr[i];
   }
-  return console.log(total);
+  return resultArr.push(total);
 }
 
 // divide function
@@ -38,7 +40,7 @@ function divide(arr) {
     if (arr[i] === arr[0]) continue;
     total = total / arr[i];
   }
-  return console.log(total);
+  return resultArr.push(total);
 }
 
 function operate(operator, arr) {
@@ -54,9 +56,6 @@ function operate(operator, arr) {
     console.log('something went wrong');
   }
 }
-
-const calcArr = [];
-// const resultArr = [];
 
 // add eventListeners
 container.addEventListener('click', (event) => {
@@ -122,7 +121,6 @@ container.addEventListener('click', (event) => {
     output.textContent = calcArr;
     console.log(calcArr);
   } else if (plusEl) {
-    // concatinate or reduce the numbers together before operation so that larger numbers can be calculated
     const resultArr = calcArr.reduce((a, b) => String(a + b), 0);
     calcArr.splice(0, calcArr.length);
     calcArr.push(Number(resultArr));
@@ -152,10 +150,12 @@ container.addEventListener('click', (event) => {
     console.log(calcArr);
   } else if (clear) {
     calcArr.splice(0, calcArr.length);
+    resultArr.splice(0, resultArr.length);
     output.textContent = calcArr;
   } else if (equal) {
-    calcArr.push(operate(calcArr[1], [calcArr[0], calcArr[2]]));
-    output.textContent = calcArr; // correct calc but goes into console
+    resultArr.unshift(operate(calcArr[1], [calcArr[0], calcArr[2]]));
+    console.log(resultArr);
+    output.textContent = resultArr[1]; // correct calc that is computed inside add/sub/multiply/divide functions with returned console.log.... return the result of the original fn into an array
   }
 });
 
@@ -164,5 +164,3 @@ container.addEventListener('click', (event) => {
 // if else may be short-end with one of loop methods
 
 // operate('-', test5); find "-" "+", find "*" "/", if this than subtract.etc. arr
-
-// before operators concatinete the array elemensts
