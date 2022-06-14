@@ -154,13 +154,8 @@ container.addEventListener('click', (event) => {
     output.textContent = calcArr;
   } else if (equal) {
     resultArr.unshift(operate(calcArr[1], [calcArr[0], calcArr[2]]));
-    console.log(resultArr);
-    output.textContent = resultArr[1]; // correct calc that is computed inside add/sub/multiply/divide functions with returned console.log.... return the result of the original fn into an array
+    console.log(resultArr); // undefined is typed for some reason
+    output.textContent = resultArr[1];
   }
 });
-
-// try split to split the array of numbers based on +/-/* and / calc them individually and then return total
-// reduce method on all event targets split by +/*- operators
 // if else may be short-end with one of loop methods
-
-// operate('-', test5); find "-" "+", find "*" "/", if this than subtract.etc. arr
