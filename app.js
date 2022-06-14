@@ -54,10 +54,9 @@ function operate(operator, arr) {
     console.log('something went wrong');
   }
 }
-const test5 = [10, 5];
-operate('-', test5);
 
 const calcArr = [];
+// const resultArr = [];
 
 // add eventListeners
 container.addEventListener('click', (event) => {
@@ -124,19 +123,30 @@ container.addEventListener('click', (event) => {
     console.log(calcArr);
   } else if (plusEl) {
     // concatinate or reduce the numbers together before operation so that larger numbers can be calculated
-    // calcArr.forEach(), reduce()
+    const resultArr = calcArr.reduce((a, b) => String(a + b), 0);
+    calcArr.splice(0, calcArr.length);
+    calcArr.push(Number(resultArr));
     calcArr.push('+');
     output.textContent = calcArr;
     console.log(calcArr);
   } else if (minusEl) {
+    const resultArr = calcArr.reduce((a, b) => String(a + b), 0);
+    calcArr.splice(0, calcArr.length);
+    calcArr.push(Number(resultArr));
     calcArr.push('-');
     output.textContent = calcArr;
     console.log(calcArr);
   } else if (multiplyEl) {
+    const resultArr = calcArr.reduce((a, b) => String(a + b), 0);
+    calcArr.splice(0, calcArr.length);
+    calcArr.push(Number(resultArr));
     calcArr.push('*');
     output.textContent = calcArr;
     console.log(calcArr);
   } else if (divideEl) {
+    const resultArr = calcArr.reduce((a, b) => String(a + b), 0);
+    calcArr.splice(0, calcArr.length);
+    calcArr.push(Number(resultArr));
     calcArr.push('/');
     output.textContent = calcArr;
     console.log(calcArr);
@@ -144,8 +154,8 @@ container.addEventListener('click', (event) => {
     calcArr.splice(0, calcArr.length);
     output.textContent = calcArr;
   } else if (equal) {
-    const result = operate(calcArr[1], [calcArr[0], calcArr[2]]);
-    output.textContent = result; // correct calc but goes into console
+    calcArr.push(operate(calcArr[1], [calcArr[0], calcArr[2]]));
+    output.textContent = calcArr; // correct calc but goes into console
   }
 });
 
