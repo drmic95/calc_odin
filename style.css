@@ -3,32 +3,7 @@
 * {
   box-sizing: border-box;
 }
-/*
-body {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  align-content: center;
-  gap: 6px;
-}
-.container {
-  display: flex;
-  display: grid;
-  width: 100vw;
-  height: 100vh;
-  flex-direction: row;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 6px;
-  column-gap: 10px;
-}
-*/
+
 body {
   width: 100vw;
   height: 100vh;
@@ -42,7 +17,8 @@ body {
   position: absolute;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-row-gap: 20px;
+  grid-row-gap: 14px;
+  grid-column-gap: 14px;
 }
 .equal {
   grid-row: 1;
