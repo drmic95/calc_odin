@@ -163,4 +163,11 @@ container.addEventListener('click', (event) => {
     output.textContent = resultArr[1];
   }
 });
-// if else may be short-end with one of loop methods
+
+// task1: make the numbers appear on the screen without colon
+// task2: allow for more numbers and fix logic to allow proper calc once more numbers and operators are initiated
+
+// fn for splice and reduce array elements between +-/* and then calculation with loops/ continue for +*/-....decontruct arr into multiple variables and the re-make fn to calculate those variables
+
+// indexof +-/*, operate index of operation with index+1, index-1; but only after all num have been reduced
+//
