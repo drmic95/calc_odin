@@ -121,53 +121,132 @@ container.addEventListener('click', (event) => {
     output.textContent = calcArr;
     console.log(calcArr);
   } else if (plusEl) {
-    const resultArr = calcArr.reduce((a, b) => String(a + b), 0);
-    calcArr.splice(0, calcArr.length);
-    calcArr.push(Number(resultArr));
-    calcArr.push('+');
-    output.textContent = calcArr;
-    console.log(calcArr);
+    if (
+      calcArr.includes('+') ||
+      calcArr.includes('-') ||
+      calcArr.includes('/') ||
+      calcArr.includes('*')
+    ) {
+      const secNum = calcArr
+        .splice(2, calcArr.length)
+        .reduce((a, b) => String(a + b), 0);
+      calcArr.push(Number(secNum));
+
+      resultArr.unshift(operate(calcArr[1], [calcArr[0], calcArr[2]]));
+      calcArr.push(resultArr[1]);
+      calcArr.push('+');
+      calcArr.splice(0, 3);
+      output.textContent = calcArr;
+      resultArr.splice(0, resultArr.length);
+      console.log(resultArr, calcArr);
+    } else {
+      const resultArr = calcArr.reduce((a, b) => String(a + b), 0);
+      calcArr.splice(0, calcArr.length);
+      calcArr.push(Number(resultArr));
+      calcArr.push('+');
+
+      output.textContent = calcArr;
+      console.log(calcArr, resultArr);
+    }
   } else if (minusEl) {
-    const resultArr = calcArr.reduce((a, b) => String(a + b), 0);
-    calcArr.splice(0, calcArr.length);
-    calcArr.push(Number(resultArr));
-    calcArr.push('-');
-    output.textContent = calcArr;
-    console.log(calcArr);
+    if (
+      calcArr.includes('+') ||
+      calcArr.includes('-') ||
+      calcArr.includes('/') ||
+      calcArr.includes('*')
+    ) {
+      const secNum = calcArr
+        .splice(2, calcArr.length)
+        .reduce((a, b) => String(a + b), 0);
+      calcArr.push(Number(secNum));
+
+      resultArr.unshift(operate(calcArr[1], [calcArr[0], calcArr[2]]));
+      calcArr.push(resultArr[1]);
+      calcArr.push('-');
+      calcArr.splice(0, 3);
+      output.textContent = calcArr;
+      resultArr.splice(0, resultArr.length);
+      console.log(resultArr, calcArr);
+    } else {
+      const resultArr = calcArr.reduce((a, b) => String(a + b), 0);
+      calcArr.splice(0, calcArr.length);
+      calcArr.push(Number(resultArr));
+      calcArr.push('-');
+
+      output.textContent = calcArr;
+      console.log(calcArr, resultArr);
+    }
   } else if (multiplyEl) {
-    const resultArr = calcArr.reduce((a, b) => String(a + b), 0);
-    calcArr.splice(0, calcArr.length);
-    calcArr.push(Number(resultArr));
-    calcArr.push('*');
-    output.textContent = calcArr;
-    console.log(calcArr);
+    if (
+      calcArr.includes('+') ||
+      calcArr.includes('-') ||
+      calcArr.includes('/') ||
+      calcArr.includes('*')
+    ) {
+      const secNum = calcArr
+        .splice(2, calcArr.length)
+        .reduce((a, b) => String(a + b), 0);
+      calcArr.push(Number(secNum));
+
+      resultArr.unshift(operate(calcArr[1], [calcArr[0], calcArr[2]]));
+      calcArr.push(resultArr[1]);
+      calcArr.push('*');
+      calcArr.splice(0, 3);
+      output.textContent = calcArr;
+      resultArr.splice(0, resultArr.length);
+      console.log(resultArr, calcArr);
+    } else {
+      const resultArr = calcArr.reduce((a, b) => String(a + b), 0);
+      calcArr.splice(0, calcArr.length);
+      calcArr.push(Number(resultArr));
+      calcArr.push('*');
+
+      output.textContent = calcArr;
+      console.log(calcArr, resultArr);
+    }
   } else if (divideEl) {
-    const resultArr = calcArr.reduce((a, b) => String(a + b), 0);
-    calcArr.splice(0, calcArr.length);
-    calcArr.push(Number(resultArr));
-    calcArr.push('/');
-    output.textContent = calcArr;
-    console.log(calcArr);
+    if (
+      calcArr.includes('+') ||
+      calcArr.includes('-') ||
+      calcArr.includes('/') ||
+      calcArr.includes('*')
+    ) {
+      const secNum = calcArr
+        .splice(2, calcArr.length)
+        .reduce((a, b) => String(a + b), 0);
+      calcArr.push(Number(secNum));
+
+      resultArr.unshift(operate(calcArr[1], [calcArr[0], calcArr[2]]));
+      calcArr.push(resultArr[1]);
+      calcArr.push('/');
+      calcArr.splice(0, 3);
+      output.textContent = calcArr;
+      resultArr.splice(0, resultArr.length);
+      console.log(resultArr, calcArr);
+    } else {
+      const resultArr = calcArr.reduce((a, b) => String(a + b), 0);
+      calcArr.splice(0, calcArr.length);
+      calcArr.push(Number(resultArr));
+      calcArr.push('/');
+
+      output.textContent = calcArr;
+      console.log(calcArr, resultArr);
+    }
   } else if (clear) {
     calcArr.splice(0, calcArr.length);
     resultArr.splice(0, resultArr.length);
     output.textContent = calcArr;
   } else if (equal) {
+    // finished
     const secNum = calcArr
       .splice(2, calcArr.length)
       .reduce((a, b) => String(a + b), 0);
     calcArr.push(Number(secNum));
-
     resultArr.unshift(operate(calcArr[1], [calcArr[0], calcArr[2]]));
-    console.log(resultArr); // undefined is typed for some reason at resultArr[0]
-    output.textContent = resultArr[1];
+    calcArr.splice(0, calcArr.length);
+    calcArr.push(resultArr[1]);
+    resultArr.splice(0, resultArr.length);
+    output.textContent = calcArr[0];
+    console.log(resultArr, calcArr);
   }
 });
-
-// task1: make the numbers appear on the screen without colon
-// task2: allow for more numbers and fix logic to allow proper calc once more numbers and operators are initiated
-
-// fn for splice and reduce array elements between +-/* and then calculation with loops/ continue for +*/-....decontruct arr into multiple variables and the re-make fn to calculate those variables
-
-// indexof +-/*, operate index of operation with index+1, index-1; but only after all num have been reduced
-//
