@@ -64,6 +64,7 @@ container.addEventListener('click', (event) => {
   const seven = event.target.classList.contains('num_7');
   const eight = event.target.classList.contains('num_8');
   const nine = event.target.classList.contains('num_9');
+  const dot = event.target.classList.contains('dot');
 
   const minusEl = event.target.classList.contains('op_minus');
   const plusEl = event.target.classList.contains('op_plus');
@@ -141,6 +142,10 @@ container.addEventListener('click', (event) => {
     console.log(calcArr);
   } else if (nine) {
     calcArr.push(9);
+    output.textContent = calcArr;
+    console.log(calcArr);
+  } else if (dot) {
+    calcArr.push('.');
     output.textContent = calcArr;
     console.log(calcArr);
   } else if (plusEl) {
