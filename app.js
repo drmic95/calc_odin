@@ -39,6 +39,7 @@ function divide(arr) {
   return resultArr.push(total);
 }
 
+// maybe call it calculate
 function operate(operator, arr) {
   if (operator === '+') {
     add(arr);
@@ -65,6 +66,7 @@ container.addEventListener('click', (event) => {
   const eight = event.target.classList.contains('num_8');
   const nine = event.target.classList.contains('num_9');
 
+  // El seems redundant here, minus, plus...
   const minusEl = event.target.classList.contains('op_minus');
   const plusEl = event.target.classList.contains('op_plus');
   const multiplyEl = event.target.classList.contains('op_multiply');
@@ -73,7 +75,20 @@ container.addEventListener('click', (event) => {
   const clear = event.target.classList.contains('clear');
   const equal = event.target.classList.contains('equal');
 
+  // maybe call it addOperand or something similar
   function operands(op) {
+    /* it would be nice if the operand could be a single variable
+    so when you check it looks something like this
+    if(operator === '+') ...
+
+    also the operators could be constants, this would be clearer semantically
+    const PLUS = '+'
+    const MINUS = '+'
+
+    if(operator === PLUS) ...
+
+    this comment is also related to the operate() function
+    */
     if (
       calcArr.includes('+') ||
       calcArr.includes('-') ||
@@ -85,6 +100,7 @@ container.addEventListener('click', (event) => {
         .reduce((a, b) => String(a + b), 0);
       calcArr.push(Number(secNum));
 
+      // we discussed this before, the operate function does not return anything, so this unshift is not needed, it just adds "undefined" to the array
       resultArr.unshift(operate(calcArr[1], [calcArr[0], calcArr[2]]));
       calcArr.push(resultArr[1]);
       calcArr.push(op);
@@ -105,6 +121,7 @@ container.addEventListener('click', (event) => {
 
   if (zero) {
     calcArr.push(0);
+    // this statement is repeated in every case, so it could be just once on the end
     output.textContent = calcArr;
     console.log(calcArr);
   } else if (one) {
@@ -152,14 +169,19 @@ container.addEventListener('click', (event) => {
   } else if (divideEl) {
     operands('/');
   } else if (clear) {
+    // it would be clearer if this was a function whose name would say it does
+    // if you look at this currently it takes a while to figure out what is happening
     calcArr.splice(0, calcArr.length);
     resultArr.splice(0, resultArr.length);
     output.textContent = calcArr;
   } else if (equal) {
+    // there is similar logic to this in two more places
+    // try to extract it somehow 
     const secNum = calcArr
       .splice(2, calcArr.length)
       .reduce((a, b) => String(a + b), 0);
     calcArr.push(Number(secNum));
+    // same as above, operate does not return anything
     resultArr.unshift(operate(calcArr[1], [calcArr[0], calcArr[2]]));
     calcArr.splice(0, calcArr.length);
     calcArr.push(resultArr[1]);
