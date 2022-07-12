@@ -3,51 +3,38 @@
 const container = document.querySelector('.container');
 const output = document.getElementById('calc');
 const calcArr = [];
-const resultArr = [];
+let result;
+const PLUS = '+';
+const MINUS = '-';
+const MULTIPLY = '*';
+const DIVIDE = '/';
+const EQUAL = '=';
 
-function add(arr) {
-  let total = 0;
-  for (let i = 0; i < arr.length; i++) {
-    total += arr[i];
-  }
-  return resultArr.push(total);
+function add(a, b) {
+  return (result = a + b);
 }
 
-function subtract(arr) {
-  let total = arr[0];
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === arr[0]) continue;
-    total -= arr[i];
-  }
-  return resultArr.push(total);
+function subtract(a, b) {
+  return (result = a - b);
 }
 
-function multiply(arr) {
-  let total = 1;
-  for (let i = 0; i < arr.length; i++) {
-    total = total * arr[i];
-  }
-  return resultArr.push(total);
+function multiply(a, b) {
+  return (result = a * b);
 }
 
-function divide(arr) {
-  let total = arr[0];
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === arr[0]) continue;
-    total = total / arr[i];
-  }
-  return resultArr.push(total);
+function divide(a, b) {
+  return (result = a / b);
 }
 
-function operate(operator, arr) {
-  if (operator === '+') {
-    add(arr);
-  } else if (operator === '-') {
-    subtract(arr);
-  } else if (operator === '*') {
-    multiply(arr);
-  } else if (operator === '/') {
-    divide(arr);
+function calculate(operator) {
+  if (operator === PLUS) {
+    add(calcArr[0], calcArr[2]);
+  } else if (operator === MINUS) {
+    subtract(calcArr[0], calcArr[2]);
+  } else if (operator === MULTIPLY) {
+    multiply(calcArr[0], calcArr[2]);
+  } else if (operator === DIVIDE) {
+    divide(calcArr[0], calcArr[2]);
   } else {
     console.log('something went wrong');
   }
@@ -66,110 +53,115 @@ container.addEventListener('click', (event) => {
   const nine = event.target.classList.contains('num_9');
   const dot = event.target.classList.contains('dot');
 
-  const minusEl = event.target.classList.contains('op_minus');
-  const plusEl = event.target.classList.contains('op_plus');
-  const multiplyEl = event.target.classList.contains('op_multiply');
-  const divideEl = event.target.classList.contains('op_divide');
+  const minus = event.target.classList.contains('op_minus');
+  const plus = event.target.classList.contains('op_plus');
+  const multiply = event.target.classList.contains('op_multiply');
+  const divide = event.target.classList.contains('op_divide');
 
   const clear = event.target.classList.contains('clear');
   const equal = event.target.classList.contains('equal');
 
-  function operands(op) {
+  // to string together numbers in display bar
+  function display() {
     if (
-      calcArr.includes('+') ||
-      calcArr.includes('-') ||
-      calcArr.includes('/') ||
-      calcArr.includes('*')
+      calcArr.includes(PLUS) ||
+      calcArr.includes(MINUS) ||
+      calcArr.includes(DIVIDE) ||
+      calcArr.includes(MULTIPLY)
     ) {
       const secNum = calcArr
         .splice(2, calcArr.length)
         .reduce((a, b) => String(a + b), 0);
       calcArr.push(Number(secNum));
+      output.textContent = calcArr;
+      console.log(calcArr);
+    } else {
+      const secNum = calcArr
+        .splice(0, calcArr.length)
+        .reduce((a, b) => String(a + b), 0);
+      calcArr.push(Number(secNum));
+      output.textContent = calcArr;
+      console.log(calcArr);
+    }
+  }
 
-      resultArr.unshift(operate(calcArr[1], [calcArr[0], calcArr[2]]));
-      calcArr.push(resultArr[1]);
-      calcArr.push(op);
+  function addOperand(op) {
+    if (
+      calcArr.includes(PLUS) ||
+      calcArr.includes(MINUS) ||
+      calcArr.includes(DIVIDE) ||
+      calcArr.includes(MULTIPLY)
+    ) {
+      const secNum = calcArr
+        .splice(2, calcArr.length)
+        .reduce((a, b) => String(a + b), 0);
+      calcArr.push(Number(secNum));
+      calculate(calcArr[1]);
+      calcArr.push(result);
+      result = 0;
+      if (op !== null) calcArr.push(op);
       calcArr.splice(0, 3);
       output.textContent = calcArr;
-      resultArr.splice(0, resultArr.length);
-      console.log(resultArr, calcArr);
     } else {
-      const resultArr = calcArr.reduce((a, b) => String(a + b), 0);
+      result = calcArr.reduce((a, b) => String(a + b), 0);
       calcArr.splice(0, calcArr.length);
-      calcArr.push(Number(resultArr));
+      calcArr.push(Number(result));
       calcArr.push(op);
-
+      result = 0;
       output.textContent = calcArr;
-      console.log(calcArr, resultArr);
     }
+  }
+
+  function CLEAR() {
+    calcArr.splice(0, calcArr.length);
+    output.textContent = calcArr;
+    result = 0;
   }
 
   if (zero) {
     calcArr.push(0);
-    output.textContent = calcArr;
-    console.log(calcArr);
+    display();
   } else if (one) {
     calcArr.push(1);
-    output.textContent = calcArr;
-    console.log(calcArr);
+    display();
   } else if (two) {
     calcArr.push(2);
-    output.textContent = calcArr;
-    console.log(calcArr);
+    display();
   } else if (three) {
     calcArr.push(3);
-    output.textContent = calcArr;
-    console.log(calcArr);
+    display();
   } else if (four) {
     calcArr.push(4);
-    output.textContent = calcArr;
-    console.log(calcArr);
+    display();
   } else if (five) {
     calcArr.push(5);
-    output.textContent = calcArr;
-    console.log(calcArr);
+    display();
   } else if (six) {
     calcArr.push(6);
-    output.textContent = calcArr;
-    console.log(calcArr);
+    display();
   } else if (seven) {
     calcArr.push(7);
-    output.textContent = calcArr;
-    console.log(calcArr);
+    display();
   } else if (eight) {
     calcArr.push(8);
-    output.textContent = calcArr;
-    console.log(calcArr);
+    display();
   } else if (nine) {
     calcArr.push(9);
-    output.textContent = calcArr;
-    console.log(calcArr);
+    display();
   } else if (dot) {
     calcArr.push('.');
-    output.textContent = calcArr;
-    console.log(calcArr);
-  } else if (plusEl) {
-    operands('+');
-  } else if (minusEl) {
-    operands('-');
-  } else if (multiplyEl) {
-    operands('*');
-  } else if (divideEl) {
-    operands('/');
+    display();
+  } else if (plus) {
+    addOperand(PLUS);
+  } else if (minus) {
+    addOperand(MINUS);
+  } else if (multiply) {
+    addOperand(MULTIPLY);
+  } else if (divide) {
+    addOperand(DIVIDE);
   } else if (clear) {
-    calcArr.splice(0, calcArr.length);
-    resultArr.splice(0, resultArr.length);
-    output.textContent = calcArr;
+    CLEAR();
   } else if (equal) {
-    const secNum = calcArr
-      .splice(2, calcArr.length)
-      .reduce((a, b) => String(a + b), 0);
-    calcArr.push(Number(secNum));
-    resultArr.unshift(operate(calcArr[1], [calcArr[0], calcArr[2]]));
-    calcArr.splice(0, calcArr.length);
-    calcArr.push(resultArr[1]);
-    resultArr.splice(0, resultArr.length);
-    output.textContent = calcArr[0];
-    console.log(resultArr, calcArr);
+    addOperand(null);
   }
 });
